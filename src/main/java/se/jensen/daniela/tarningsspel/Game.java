@@ -23,11 +23,36 @@ public class Game {
         System.out.println("==============================");
         System.out.println("Welcome to Danis DICEGAME!!");
         System.out.println("==============================");
-        setupPlayers();
 
-    }
+        // endast spelarinmatning och inget annat ansvar
+        setupPlayers(); // delegerar till setupplayers och startar spelet
+
+
+        // skapar en meny med 2 val för spelaren att starta/avsluta spelet
+        while (true) {
+            System.out.print("\n====================MENY====================");
+            System.out.print("\nvälj ett alternativ");
+            System.out.println("\nSkriv play följt av enter för att STARTA SPELET");
+            System.out.println("Skriv quit följt av enter för att AVSLUTA SPELET");
+            System.out.println("===============================================");
+            String input = scanner.next();
+
+            // lägger in en if stats som ser till att spelet startar eller avslutas
+            if (input.equals("quit")) {
+                System.out.println("Spelet avslutas nu.........");
+                break;
+            } else if (input.equals("play")) {
+                playMatch();
+            } else {
+                System.out.println("Fel inmatning, vänligen välj ett alternativ");
+            }
+
+        }
+
+      //Stänger scanner sist när hela applikationen avslutas
+        scanner.close();
+}
     private void setupPlayers() { // lägger in spelarens namn och startar spelet
-
         while (true) { // lägger in en loop med felhantering tills inmatning blir rätt
             try {
                 System.out.print("Välkommen spelare 1, vänligen ange ditt förnamn tack : ");
@@ -51,37 +76,20 @@ public class Game {
 
             }
         }
-        // skapar en meny med 2 val för spelaren att starta/avsluta spelet
-        while (true) {
-        System.out.print("\n====================MENY====================");
-        System.out.print("\nvälj ett alternativ");
-        System.out.println("\nSkriv play följt av enter för att STARTA SPELET");
-        System.out.println("Skriv quit följt av enter för att AVSLUTA SPELET");
-        System.out.println("===============================================");
-        String input = scanner.next();
-
-        // lägger in en if stats som ser till att spelet startar eller avslutas
-        if (input.equals("quit")) {
-            System.out.println("Spelet avslutas nu.........");
-            break;
-        }else if (!(input.equals("play")) && !(input.equals("quit"))){
-                System.out.println("Fel inmatning, vänligen välj ett alternativ");
-
-        }else if(input.equals("play")){
-            playMatch();
-        }
-
     }
-}
 
     private void playMatch() {
         player1.restScore();
         player2.restScore();
 
-        // spelare kastar tärningen 2 gånger
+        System.out.println("==============================");
+        System.out.println("==========SPELET BÖRJAR==========");
+        System.out.println("==============================");
+
+        // spelare 1 kastar tärningen 2 gånger
         for (int i = 0; i < 2; i++) {
-            int roll = dice.roll();
-            player1.addScore(roll);
+            int roll = dice.roll(); // delegerar till dice
+            player1.addScore(roll); // delegerar till players
             System.out.println(player1.getFullName() + " Slog " + roll);
         }
 
@@ -106,7 +114,6 @@ public class Game {
 
         }else{
             System.out.println("Det blev oavgjort!");
-            scanner.close();
         }
     }
     }
