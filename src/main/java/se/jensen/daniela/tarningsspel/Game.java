@@ -10,7 +10,7 @@ public class Game {
     private Dice dice; //instans av dice och används för att kasta träningen
     private Scanner scanner;// används för att läsa in spelarens input
 
-    //Konstruktor
+    //Konstruktor, skapar alla attribut
     public Game() {
         player1 = new Players();
         player2 = new Players();
@@ -67,9 +67,9 @@ public class Game {
         while (true) {
             try {
                 System.out.print("Välkommen spelare 2, vänligen ange ditt förnamn tack : ");
-                player2.setFirstName(scanner.next());
+                player2.setFirstName(scanner.nextLine());
                 System.out.println("Ange nu ditt efternamn tack: ");
-                player2.setLastName(scanner.next());
+                player2.setLastName(scanner.nextLine());
                 break; // avsluta denna loopen om  både för och efternamn blir imatade
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "FEL, vänligen försök igen");
